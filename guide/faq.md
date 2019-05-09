@@ -450,3 +450,24 @@ wrapper.last("limit 1");
 private Boolean status;
 ```
 
+## 出现 `Caused by: java.lang.NoSuchFieldError: INSTANCE` 异常
+
+> 不要怀疑，正视自己，这个异常肯定是 mybatis 的 jar 包的版本过低……
+
+1. 检查是不是引入了低于`mybatis-plus`所自带`mybatis`的`jar`包版本
+
+2. 检查是不是引入了其他框架组件内部自带`mybatis`的`jar`包版本过低例如`springboot`版本的`activity6`
+
+- 解决方式：
+  
+  ```maven pom
+  <groupId>org.activiti</groupId>
+  <artifactId>activiti-spring-boot-starter-basic</artifactId>
+  <version>6.0.0</version>
+  <exclusions>
+      <exclusion>
+          <groupId>org.mybatis</groupId>
+          <artifactId>mybatis</artifactId>
+      </exclusion>
+  </exclusions>
+ ```
